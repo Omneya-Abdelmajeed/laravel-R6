@@ -119,6 +119,11 @@ Route::prefix('cars')->group(function () {
     });
 
     Route::prefix('usa')->group(function () {
+
+        Route::get('', function () {
+            return 'Wellcome to USA cars!';
+        });
+
         Route::get('ford', function () {
             return 'Wellcome to Ford cars! </br> Made in USA.';
         });
@@ -129,6 +134,11 @@ Route::prefix('cars')->group(function () {
     });
 
     Route::prefix('ger')->group(function () {
+
+        Route::get('', function () {
+            return 'Wellcome to German cars!';
+        });
+
         Route::get('mercedes', function () {
             return 'Wellcome to Mercedes cars! </br> Made in Germany.';
         });
