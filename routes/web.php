@@ -1,6 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ExampleController;
+
+// Route::get('login', [ExampleController::class, 'login']);
+// Route::get('cv', [ExampleController::class, 'cv']);
+Route::get('task3', [ExampleController::class, 'task3']);
+Route::post('user_data', [ExampleController::class, 'store'])->name('user_data');
 
 //lambda function doesn't need name
 Route::get('/', function () {
@@ -61,10 +67,10 @@ Route::get('/w', function () {
 //     'name' => '[a-zA-Z]+',
 // ]);
 
-Route::get('baby/{gender}', function ($gender) {
-    $gender = ucfirst($gender);
-    return "Gender is " . $gender;
-})->whereIn('gender', ['male', 'female']);
+// Route::get('baby/{gender}', function ($gender) {
+//     $gender = ucfirst($gender);
+//     return "Gender is " . $gender;
+// })->whereIn('gender', ['male', 'female']);
 
 //***route prefix
 // company/IT
@@ -86,6 +92,7 @@ Route::get('baby/{gender}', function ($gender) {
 //     });
 // });
 
+// task2
 // - accounts
 // - accounts/admin
 // - accounts/user
@@ -134,6 +141,11 @@ Route::prefix('cars')->group(function () {
     });
 
     Route::prefix('ger')->group(function () {
+
+        Route::get('', function () {
+            return 'Wellcome to German cars!';
+        });
+
         Route::get('mercedes', function () {
             return 'Wellcome to Mercedes cars! </br> Made in Germany.';
         });
@@ -147,3 +159,51 @@ Route::prefix('cars')->group(function () {
         });
     });
 });
+
+//session_3 Advanced-level
+//Fallback used to redirect to home page to not show error to users if they tried to enter a URI not found
+//Note: it is used after finishing the project
+
+// Route::fallback(function () {
+//     return redirect('/');
+// });
+
+//Route view
+//to show all views recources -> views
+//ctrl + u page resource
+
+//logics
+// Route::get('cv', function () {
+//     return view('cv');
+// });
+// the previous code is equivalent to
+// Route::view('cv', 'cv');
+
+// Route::get('link', function () {
+//     $url = route('w');
+//     return "<a href='$url'>Go to welcome page</a>";
+// });
+
+// Route::get('link', function () {
+//     $url1 = route('w');
+//     $url2 = route('g');
+//     return "<a href='$url1'>go to welcome</a> <br> <a href='$url2'>go to page</a> ";
+//      return redirect('welcome');
+// });
+
+// Route::get('welcome', function () {
+//     return "welcome to Laravel";
+// })->name('w');
+
+// Route::get('goodbye', function () {
+//     return "goodbye to laravel";
+// })->name('g');
+/////////////////////////////////////////////
+// Route::get('login', function () {
+//     return view('login');
+// });
+
+// Route::post('data', function () { // the uri which appear on browser
+//     return 'Data received successfully!';
+// })->name('data');
+
