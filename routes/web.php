@@ -2,11 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ExampleController;
+use App\Http\Controllers\StoreController;
 
 // Route::get('login', [ExampleController::class, 'login']);
 // Route::get('cv', [ExampleController::class, 'cv']);
 Route::get('task3', [ExampleController::class, 'task3']);
-Route::post('user_data', [ExampleController::class, 'store'])->name('user_data');
+Route::post('user_data', [StoreController::class, 'store'])->name('user_data');
 
 //lambda function doesn't need name
 Route::get('/', function () {
