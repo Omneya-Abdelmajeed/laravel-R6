@@ -2,12 +2,16 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ExampleController;
-use App\Http\Controllers\StoreController;
+use App\Http\Controllers\CarController;
+
 
 // Route::get('login', [ExampleController::class, 'login']);
 // Route::get('cv', [ExampleController::class, 'cv']);
 Route::get('task3', [ExampleController::class, 'task3']);
-Route::post('user_data', [StoreController::class, 'store'])->name('user_data');
+Route::post('user_data', [ExampleController::class, 'store'])->name('user_data');
+
+Route::get('cars/create', [CarController::class, 'create'])->name('cars.create');
+Route::post('cars', [CarController::class, 'store'])->name('cars.store');
 
 //lambda function doesn't need name
 Route::get('/', function () {
@@ -120,46 +124,46 @@ Route::prefix('accounts')->group(function () {
 // - cars/ger/audi
 // - cars/ger/volkswagen
 
-Route::prefix('cars')->group(function () {
+// Route::prefix('cars')->group(function () {
 
-    Route::get('', function () {
-        return 'Wellcome to cars webpage!';
-    });
+//     Route::get('', function () {
+//         return 'Wellcome to cars webpage!';
+//     });
 
-    Route::prefix('usa')->group(function () {
+//     Route::prefix('usa')->group(function () {
 
-        Route::get('', function () {
-            return 'Wellcome to USA cars!';
-        });
+//         Route::get('', function () {
+//             return 'Wellcome to USA cars!';
+//         });
 
-        Route::get('ford', function () {
-            return 'Wellcome to Ford cars! </br> Made in USA.';
-        });
+//         Route::get('ford', function () {
+//             return 'Wellcome to Ford cars! </br> Made in USA.';
+//         });
 
-        Route::get('tesla', function () {
-            return 'Wellcome to Tesla cars! </br> Made in USA.';
-        });
-    });
+//         Route::get('tesla', function () {
+//             return 'Wellcome to Tesla cars! </br> Made in USA.';
+//         });
+//     });
 
-    Route::prefix('ger')->group(function () {
+//     Route::prefix('ger')->group(function () {
 
-        Route::get('', function () {
-            return 'Wellcome to German cars!';
-        });
+//         Route::get('', function () {
+//             return 'Wellcome to German cars!';
+//         });
 
-        Route::get('mercedes', function () {
-            return 'Wellcome to Mercedes cars! </br> Made in Germany.';
-        });
+//         Route::get('mercedes', function () {
+//             return 'Wellcome to Mercedes cars! </br> Made in Germany.';
+//         });
 
-        Route::get('audi', function () {
-            return 'Wellcome to Audi cars! </br> Made in Germany.';
-        });
+//         Route::get('audi', function () {
+//             return 'Wellcome to Audi cars! </br> Made in Germany.';
+//         });
 
-        Route::get('volkswagen', function () {
-            return 'Wellcome to Volkswagen cars! </br> Made in Germany.';
-        });
-    });
-});
+//         Route::get('volkswagen', function () {
+//             return 'Wellcome to Volkswagen cars! </br> Made in Germany.';
+//         });
+//     });
+// });
 
 //session_3 Advanced-level
 //Fallback used to redirect to home page to not show error to users if they tried to enter a URI not found
