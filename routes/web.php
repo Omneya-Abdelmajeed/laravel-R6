@@ -11,7 +11,7 @@ Route::get('task3', [ExampleController::class, 'task3']);
 Route::post('user_data', [ExampleController::class, 'store'])->name('user_data');
 
 Route::get('cars/create', [CarController::class, 'create'])->name('cars.create');
-Route::post('cars', [CarController::class, 'store'])->name('cars.store');
+Route::post('cars', [CarController::class, 'store'])->name('cars.store'); 
 
 //lambda function doesn't need name
 Route::get('/', function () {

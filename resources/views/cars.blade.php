@@ -14,7 +14,7 @@
     rel="stylesheet">
   <style>
     * {
-      font-family: "Lato", sans-serif;
+      font-family: "Lato", sans-serif; 
     }
   </style>
 </head>

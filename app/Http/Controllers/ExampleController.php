@@ -19,9 +19,8 @@ class ExampleController extends Controller
     {
         return view('task3');
     }
-    public function store(Request $request)
+    function store(Request $request)
     {
-
         $name = $request->name;
         $email = $request->email;
         $subject = $request->subject;
