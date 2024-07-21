@@ -31,21 +31,22 @@
               <th scope="col">Price</th>
               <th scope="col">Description</th>
               <th scope="col">Published</th>
+              <th scope="col">Edit</th>
             </tr>
           </thead>
           <tbody>
+          <!-- cars from CarController compact -->
+
+            @foreach($cars as $car)    
             <tr>
-              <td scope="row">BMW</td>
-              <td>120000</td>
-              <td>test test test ...</td>
-              <td>YES</td>
+              <td scope="row">{{$car['carTitle']}}</td>
+              <td>{{$car['price']}}</td>
+              <td>{{ Str::limit($car['description'], 20, '...')}}</td>
+              <td>{{$car['published'] ? 'YES' : 'NO'}}</td>   <!--conditional operator-->
+         <!-- <td>{{($car['pub']=== 1) ? "yes" : "no"}}</td> -->
+              <td><a href="{{route('cars.edit', $car['id'])}}">Edit</a></td>
             </tr>
-            <tr>
-              <td scope="row">BMW</td>
-              <td>120000</td>
-              <td>test test test ...</td>
-              <td>YES</td>
-            </tr>
+            @endforeach
           </tbody>
         </table>
       </div>
