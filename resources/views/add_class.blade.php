@@ -61,7 +61,7 @@
               <div class="col-md-10">
                 <input
                   type="number"
-                  step="0.1"
+                  step="0.01"
                   placeholder="Enter price"
                   class="form-control py-2"
                   name="price"

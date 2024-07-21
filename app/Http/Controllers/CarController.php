@@ -11,7 +11,12 @@ class CarController extends Controller
      */
     public function index()
     {
-        //
+        //get all cars from database
+        //return view all cars
+        //select * from cars by the following code:
+        $cars = Car::get();
+
+        return view('cars', compact('cars'));
     }
  
     /**
@@ -27,18 +32,32 @@ class CarController extends Controller
      */
     public function store(Request $request)
     {
-       // dd($request);
-       $carTitle = 'BMW';
-       $price = 12;
-       $description = "test";
-       $published = true;
+    //    // dd($request);
+    //    $carTitle = 'BMW';
+    //    $price = 12;
+    //    $description = "test";
+    //    $published = true;
 
-       Car::create([
-            'carTitle' => $carTitle,
-            'price' => $price,
-            'description' => $description,
-            'published' => $published,
-       ]);
+    //    Car::create([
+    //         'carTitle' => $carTitle,
+    //         'price' => $price,
+    //         'description' => $description,
+    //         'published' => $published,
+    //    ]);
+
+    //session_05
+    // if(isset($request->published)) {
+    //     $pub = true;
+    // } else {
+    //     $pub = false;
+    // }
+   Car::create([
+        //'key' => 'value'
+        'carTitle' => $request->carTitle,
+        'description' => $request->description,
+        'price' => $request->price,
+        'published' => isset($request->published)
+    ]);
        return "Data added Successfully";
     }
 
@@ -56,6 +75,9 @@ class CarController extends Controller
     public function edit(string $id)
     {
         //
+        //return "Car id = " . $id;
+        $car = Car::findOrFail($id);
+        return view('edit_car', compact('car'));
     }
 
     /**
