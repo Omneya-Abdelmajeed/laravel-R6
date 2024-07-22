@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Course;
+use Illuminate\Http\Request;
 
 class ClassController extends Controller
 {
@@ -12,7 +12,12 @@ class ClassController extends Controller
      */
     public function index()
     {
-        //
+        //get all classes from database
+        //return view all classes
+        //select * from classes is equ. to the following code:
+        $classes = Course::get();
+
+        return view('classes', compact('classes'));
     }
 
     /**
@@ -29,13 +34,13 @@ class ClassController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-        //required here is fore Server-Side validation
-        'className' => 'required|string|max:100',
-        'capacity' => 'required|integer',
-        'price' => 'required|numeric',
-        'time_from' => 'required|date_format:H:i',
-        'time_to' => 'required|date_format:H:i',
-        'isFulled' => 'boolean',
+            //required here is fore Server-Side validation
+            'className' => 'required|string|max:100',
+            'capacity' => 'required|integer',
+            'price' => 'required|numeric',
+            'time_from' => 'required|date_format:H:i',
+            'time_to' => 'required|date_format:H:i',
+            'isFulled' => 'boolean',
         ]);
 
         //Solution as Session_04:
@@ -47,14 +52,15 @@ class ClassController extends Controller
         // $time_to = '09:00:00';
         // $isFulled= true;
 
-    //In order to store this data inside the database 
+        //In order to store this data inside the database
         Course::create([
             'className' => $request->className,
             'capacity' => $request->capacity,
             'price' => $request->price,
             'time_from' => $request->time_from,
             'time_to' => $request->time_to,
-            'isFulled' => $request->has('isFulled'),
+            'isFulled' => isset($request->isFulled),
+            // 'isFulled' => $request->has('isFulled'),
         ]);
         return "Data added Successfully";
     }
@@ -72,7 +78,9 @@ class ClassController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $class = Course::findOrFail($id);
+        return view('edit_class', compact('class'));
+        //return "This Class id is equal " . $id . "<br>And its name is: " . $class->className;
     }
 
     /**
