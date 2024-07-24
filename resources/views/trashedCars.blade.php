@@ -23,7 +23,7 @@
   <main>
     <div class="container my-5">
       <div class="bg-light p-5 rounded">
-        <h2 class="fw-bold fs-2 mb-5 pb-2">All Cars</h2>
+        <h2 class="fw-bold fs-2 mb-5 pb-2">Trashed Cars</h2>
         <table class="table table-hover">
           <thead>
             <tr class="table-dark">
@@ -32,7 +32,7 @@
               <th scope="col">Description</th>
               <th scope="col">Published</th>
               <th scope="col">Edit</th>
-              <th scope="col">Delete</th>
+              <th scope="col">Permenant Delete</th>
               
             </tr>
           </thead>
@@ -46,8 +46,8 @@
               <td>{{ Str::limit($car['description'], 20, '...')}}</td>
               <td>{{$car['published'] ? 'YES' : 'NO'}}</td>   <!--conditional operator-->
          <!-- <td>{{($car['pub']=== 1) ? "yes" : "no"}}</td> -->
-              <td><a href="{{route('cars.edit', $car['id'])}}">Edit</a></td>
-              <td><a href="{{route('cars.destroy', $car['id'])}}" onclick="confirm('Are you sure you want to delete?')">Delete</a></td>
+              <td><a href="">Edit</a></td>
+              <td><a href="#">Delete</a></td>
 
             </tr>
             @endforeach
