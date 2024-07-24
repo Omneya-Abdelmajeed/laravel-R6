@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Car;
+use Illuminate\Http\Request;
+
 class CarController extends Controller
 {
     /**
@@ -18,7 +19,7 @@ class CarController extends Controller
 
         return view('cars', compact('cars'));
     }
- 
+
     /**
      * Show the form for creating a new resource.
      */
@@ -32,33 +33,34 @@ class CarController extends Controller
      */
     public function store(Request $request)
     {
-    //    // dd($request);
-    //    $carTitle = 'BMW';
-    //    $price = 12;
-    //    $description = "test";
-    //    $published = true;
+        //    // dd($request);
+        //    $carTitle = 'BMW';
+        //    $price = 12;
+        //    $description = "test";
+        //    $published = true;
 
-    //    Car::create([
-    //         'carTitle' => $carTitle,
-    //         'price' => $price,
-    //         'description' => $description,
-    //         'published' => $published,
-    //    ]);
+        //    Car::create([
+        //         'carTitle' => $carTitle,
+        //         'price' => $price,
+        //         'description' => $description,
+        //         'published' => $published,
+        //    ]);
 
-    //session_05
-    // if(isset($request->published)) {
-    //     $pub = true;
-    // } else {
-    //     $pub = false;
-    // }
-   Car::create([
-        //'key' => 'value'
-        'carTitle' => $request->carTitle,
-        'description' => $request->description,
-        'price' => $request->price,
-        'published' => isset($request->published)
-    ]);
-       return "Data added Successfully";
+        //session_05
+        // if(isset($request->published)) {
+        //     $pub = true;
+        // } else {
+        //     $pub = false;
+        // }
+        Car::create([
+            //'key' => 'value'
+            'carTitle' => $request->carTitle,
+            'description' => $request->description,
+            'price' => $request->price,
+            'published' => isset($request->published),
+        ]);
+        // return "Data added Successfully";
+        return redirect()->route('cars.index');
     }
 
     /**
@@ -66,7 +68,8 @@ class CarController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $car = car::findOrFail($id);
+        return view('car_details', compact('car'));
     }
 
     /**
@@ -85,7 +88,19 @@ class CarController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        // dd($request, $id);
+        //$request ==> data to be updated
+        //$id
+        $data = [
+            'carTitle' => $request->carTitle,
+            'description' => $request->description,
+            'price' => $request->price,
+            'published' => isset($request->published),
+        ];
+        Car::where('id', $id)->update($data);
+
+        // return "data updated successfully";
+        return redirect()->route('cars.index');
     }
 
     /**
@@ -93,6 +108,16 @@ class CarController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        //return'delete page';
+        //softDelete
+        Car::where('id', $id)->delete();
+       // return 'Data deleted successfully';
+        return redirect()->route('cars.index');
+
+    }
+    public function showDeleted(){
+        $cars = Car::onlyTrashed()->get();
+
+        return view('trashedCars', compact('cars'));
     }
 }
