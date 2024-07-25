@@ -40,8 +40,8 @@
           <!-- cars from CarController compact -->
 
             @foreach($cars as $car)    
-            <tr>              <td scope="row"><a href="{{route('car.details', $car['id'])}}">{{$car['carTitle']}}</a></td>
-
+            <tr>              
+              <td scope="row"><a href="{{route('car.details', $car['id'])}}">{{$car['carTitle']}}</a></td>
               <td>{{$car['price']}}</td>
               <td>{{ Str::limit($car['description'], 20, '...')}}</td>
               <td>{{$car['published'] ? 'YES' : 'NO'}}</td>   <!--conditional operator-->

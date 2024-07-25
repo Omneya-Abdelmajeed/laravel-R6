@@ -33,15 +33,16 @@ class ClassController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            //required here is fore Server-Side validation
-            'className' => 'required|string|max:100',
-            'capacity' => 'required|integer',
-            'price' => 'required|numeric',
-            'time_from' => 'required|date_format:H:i',
-            'time_to' => 'required|date_format:H:i',
-            'isFulled' => 'boolean',
-        ]);
+        //Makes conflict??
+        // $request->validate([
+        //     //required here is fore Server-Side validation
+        //     'className' => 'required|string|max:100',
+        //     'capacity' => 'required|integer',
+        //     'price' => 'required|numeric',
+        //     'time_from' => 'required|date_format:H:i',
+        //     'time_to' => 'required|date_format:H:i',
+        //     'isFulled' => 'boolean',
+        // ]);
 
         //Solution as Session_04:
 
@@ -62,7 +63,8 @@ class ClassController extends Controller
             'isFulled' => isset($request->isFulled),
             // 'isFulled' => $request->has('isFulled'),
         ]);
-        return "Data added Successfully";
+       // return "Data added Successfully";
+       return redirect()->route('classes.index');
     }
 
     /**
@@ -70,7 +72,8 @@ class ClassController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $class = Course::findOrFail($id);
+        return view('class_details', compact('class'));
     }
 
     /**
@@ -88,7 +91,18 @@ class ClassController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        //$request ==> data to be updated
+        $data = [
+            'className' => $request->className,
+            'capacity' => $request->capacity,
+            'price' => $request->price,
+            'time_from' => $request->time_from,
+            'time_to' => $request->time_to,
+            'isFulled' => isset($request->isFulled),
+        ];
+        Course::where('id', $id)->update($data);
+        //return "Data updated successfully";
+        return redirect()->route('classes.index');
     }
 
     /**
@@ -96,6 +110,15 @@ class ClassController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        //return "delete page";
+        //softDelete
+        Course::where('id', $id)->delete();
+        //return 'Data deleted successfully';
+        return redirect()->route('classes.index');
+    }
+    public function showDeleted(){
+        $classes = Course::onlyTrashed()->get();
+
+        return view('trashedClasses', compact('classes'));
     }
 }
