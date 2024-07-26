@@ -16,9 +16,9 @@ Route::get('cars/trashed', [CarController::class, 'showDeleted'])->name('cars.sh
 Route::get('classes', [ClassController::class, 'index'])->name('classes.index');
 Route::get('classes/create', [ClassController::class, 'create'])->name('classes.create');
 Route::post('classes', [ClassController::class, 'store'])->name('classes.store');
-Route::get('classes/{id}', [ClassController::class, 'edit'])->name('classes.edit');
+Route::get('classes/{id}/edit', [ClassController::class, 'edit'])->name('classes.edit');
 Route::put('classes/{id}', [ClassController::class, 'update'])->name('classes.update');
-Route::get('class/{id}/details', [ClassController::class, 'show'])->name('class.details');
+Route::get('classes/{id}/details', [ClassController::class, 'show'])->name('class.details');
 Route::delete('classes/{id}/delete', [ClassController::class, 'destroy'])->name('classes.destroy');
 Route::get('classes/trashed', [ClassController::class, 'showDeleted'])->name('classes.showDeleted');
 
