@@ -14,7 +14,7 @@
     rel="stylesheet">
   <style>
     * {
-      font-family: "Lato", sans-serif; 
+      font-family: "Lato", sans-serif;
     }
   </style>
 </head>
@@ -31,24 +31,36 @@
               <th scope="col">Price</th>
               <th scope="col">Description</th>
               <th scope="col">Published</th>
-              <th scope="col">Edit</th>
+              <th scope="col">Restore</th>
               <th scope="col">Permenant Delete</th>
-              
+
             </tr>
           </thead>
           <tbody>
           <!-- cars from CarController compact -->
 
-            @foreach($cars as $car)    
-            <tr>              
+            @foreach($cars as $car)
+            <tr>
               <td scope="row"><a href="{{route('car.details', $car['id'])}}">{{$car['carTitle']}}</a></td>
               <td>{{$car['price']}}</td>
               <td>{{ Str::limit($car['description'], 20, '...')}}</td>
               <td>{{$car['published'] ? 'YES' : 'NO'}}</td>   <!--conditional operator-->
-         <!-- <td>{{($car['pub']=== 1) ? "yes" : "no"}}</td> -->
-              <td><a href="">Edit</a></td>
-              <td><a href="#">Delete</a></td>
+              <!-- <td>{{($car['pub']=== 1) ? "yes" : "no"}}</td> -->
+              <td>
+                <form action="{{route('cars.restore', $car['id'])}}" method="POST">
+                  @csrf
+                  @method('patch')
+                  <button type="submit" class="btn btn-link m-0 p-0">Restore</button>
+                </form>
+              </td>
 
+              <td>
+                <form action="{{route('cars.forceDelete', $car['id'])}}" method="POST" onclick="return confirm('Are you sure you want to delete?')">
+                  @csrf
+                  @method('delete')
+                  <button type="submit" class="btn btn-link m-0 p-0">Delete</button>
+                 </form>
+              </td>
             </tr>
             @endforeach
           </tbody>

@@ -40,14 +40,22 @@
           <!-- cars from CarController compact -->
 
             @foreach($cars as $car)    
-            <tr>              
+            <tr>
+
               <td scope="row"><a href="{{route('car.details', $car['id'])}}">{{$car['carTitle']}}</a></td>
               <td>{{$car['price']}}</td>
               <td>{{ Str::limit($car['description'], 20, '...')}}</td>
               <td>{{$car['published'] ? 'YES' : 'NO'}}</td>   <!--conditional operator-->
-         <!-- <td>{{($car['pub']=== 1) ? "yes" : "no"}}</td> -->
+              <!-- <td>{{($car['pub']=== 1) ? "yes" : "no"}}</td> -->
+
               <td><a href="{{route('cars.edit', $car['id'])}}">Edit</a></td>
-              <td><a href="{{route('cars.destroy', $car['id'])}}" onclick="confirm('Are you sure you want to delete?')">Delete</a></td>
+
+              <!-- <a href="{{route('cars.destroy', $car['id'])}}" onclick="return confirm('Are you sure you want to delete?')">Delete</a></td> -->
+              <td><form action="{{route('cars.destroy', $car->id)}}" method="POST" onclick="return confirm('Are you sure you want to delete?')">
+                @csrf
+                @method('delete')
+                <button type="submit" class="btn btn-link m-0 p-0">Delete</button> 
+              </form></td>
 
             </tr>
             @endforeach

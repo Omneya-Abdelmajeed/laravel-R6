@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Car;
 use Illuminate\Http\Request;
+use phpDocumentor\Reflection\Types\Boolean;
 
 class CarController extends Controller
 {
@@ -52,13 +53,18 @@ class CarController extends Controller
         // } else {
         //     $pub = false;
         // }
-        Car::create([
+        $data = $request->validate([
             //'key' => 'value'
-            'carTitle' => $request->carTitle,
-            'description' => $request->description,
-            'price' => $request->price,
-            'published' => isset($request->published),
+            'carTitle' => 'required|string',
+            'description' => 'required|string|max:1000',
+            'price' => 'required|numeric',
+            // 'published' => 'boolean',
         ]);
+
+         $data['published'] = isset($request->published);
+         dd($data);
+        
+        Car::create($data);
         // return "Data added Successfully";
         return redirect()->route('cars.index');
     }
@@ -106,7 +112,7 @@ class CarController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Request $request,string $id)
     {
         //return'delete page';
         //softDelete
@@ -120,4 +126,16 @@ class CarController extends Controller
 
         return view('trashedCars', compact('cars'));
     }
+
+    public function restore(string $id){
+        Car::where('id', $id)->restore();
+        return redirect()->route('cars.showDeleted');
+    }
+
+    public function forceDelete(string $id)
+    {
+        Car::where('id', $id)->forceDelete();
+        return redirect()->route('cars.index');
+
+    }    
 }
