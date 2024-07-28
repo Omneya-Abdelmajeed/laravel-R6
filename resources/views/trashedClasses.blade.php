@@ -32,7 +32,7 @@
                 <th scope="col">Price</th>
                 <th scope="col">Capacity</th>
                 <th scope="col">Is Fulled</th>
-                <th scope="col">Edit</th>
+                <th scope="col">Restore</th>
                 <th scope="col">Permenant Delete</th>
 
               </tr>
@@ -45,8 +45,21 @@
                 <td>{{$class['price']}}</td>
                 <td>{{$class['capacity']}}</td>
                 <td>{{$class['isFulled'] ? 'YES' : 'NO'}}</td>
-                <td><a href="#">Edit</a></td>
-                <td><a href="#">Delete</a></td>
+                <td>
+                <form action="{{route('classes.restore', $class['id'])}}" method="POST">
+                  @csrf
+                  @method('patch')
+                  <button type="submit" class="btn btn-link m-0 p-0">Restore</button>
+                </form>
+              </td>
+
+              <td>
+                <form action="{{route('classes.forceDelete', $class['id'])}}" method="POST" onclick="return confirm('Are you sure you want to delete?')">
+                  @csrf
+                  @method('delete')
+                  <button type="submit" class="btn btn-link m-0 p-0">Delete</button>
+                 </form>
+              </td>
               </tr>
               @endforeach
             </tbody>

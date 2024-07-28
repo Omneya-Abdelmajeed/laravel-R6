@@ -60,7 +60,7 @@
               >
               <div class="col-md-10">
                 <input
-                  type="number"
+                  type="text"
                   step="0.01"
                   placeholder="Enter price"
                   class="form-control py-2"
