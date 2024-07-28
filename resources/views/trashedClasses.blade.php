@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>All Classes</title>
+    <title>Trashed Classes</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
       integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -23,7 +23,7 @@
 
       <div class="container my-5">
         <div class="bg-light p-5 rounded">
-          <h2 class="fw-bold fs-2 mb-5 pb-2">All Classes</h2>
+          <h2 class="fw-bold fs-2 mb-5 pb-2">Trashed Classes</h2>
           
           <table class="table table-hover">
             <thead>
@@ -33,7 +33,7 @@
                 <th scope="col">Capacity</th>
                 <th scope="col">Is Fulled</th>
                 <th scope="col">Edit</th>
-                <th scope="col">Delete</th>
+                <th scope="col">Permenant Delete</th>
 
               </tr>
             </thead>
@@ -45,16 +45,8 @@
                 <td>{{$class['price']}}</td>
                 <td>{{$class['capacity']}}</td>
                 <td>{{$class['isFulled'] ? 'YES' : 'NO'}}</td>
-                <td><a href="{{route('classes.edit', $class['id'])}}">Edit</a></td>
-                <!-- <td><a href="{{route('classes.destroy', $class['id'])}}" onclick="confirm('Are you sure you want to delete?')">Delete</a></td> -->
-                <td>
-                  <form action="{{route('classes.destroy', $class['id'])}}" method="POST" onclick="confirm('Are you sure you want to delete?')" >
-                  @csrf 
-                  @method('DELETE')
-                  <input type="hidden" name="id" value="{{ $class->id }}">
-                  <input type="submit" value="Delete">
-                  </form>
-                </td>
+                <td><a href="#">Edit</a></td>
+                <td><a href="#">Delete</a></td>
               </tr>
               @endforeach
             </tbody>
