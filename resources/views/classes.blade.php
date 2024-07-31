@@ -46,13 +46,14 @@
                 <td>{{$class['capacity']}}</td>
                 <td>{{$class['isFulled'] ? 'YES' : 'NO'}}</td>
                 <td><a href="{{route('classes.edit', $class['id'])}}">Edit</a></td>
+
                 <!-- <td><a href="{{route('classes.destroy', $class['id'])}}" onclick="confirm('Are you sure you want to delete?')">Delete</a></td> -->
                 <td>
-                  <form action="{{route('classes.destroy', $class['id'])}}" method="POST" onclick="confirm('Are you sure you want to delete?')" >
+                  <form action="{{route('classes.destroy', $class['id'])}}" method="POST" onclick="return confirm('Are you sure you want to delete?')" >
                   @csrf 
-                  @method('DELETE')
+                  @method('delete')
                   <input type="hidden" name="id" value="{{ $class->id }}">
-                  <input type="submit" value="Delete">
+                  <input type="submit" class="btn btn-link m-0 p-0" value="Delete">
                   </form>
                 </td>
               </tr>

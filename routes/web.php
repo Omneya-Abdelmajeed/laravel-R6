@@ -16,17 +16,20 @@ Route::prefix('cars')->group(function() {
     Route::patch('{id}', [CarController::class, 'restore'])->name('cars.restore');
     Route::delete('{id}', [CarController::class, 'forceDelete'])->name('cars.forceDelete');
 });
+// Route::resource('cars', CarController::class);
 
-
-Route::get('classes', [ClassController::class, 'index'])->name('classes.index');
-Route::get('classes/create', [ClassController::class, 'create'])->name('classes.create');
-Route::post('classes', [ClassController::class, 'store'])->name('classes.store');
-Route::get('classes/{id}/edit', [ClassController::class, 'edit'])->name('classes.edit');
-Route::put('classes/{id}', [ClassController::class, 'update'])->name('classes.update');
-Route::get('classes/{id}/details', [ClassController::class, 'show'])->name('class.details');
-Route::delete('classes/{id}/delete', [ClassController::class, 'destroy'])->name('classes.destroy');
-Route::get('classes/trashed', [ClassController::class, 'showDeleted'])->name('classes.showDeleted');
-
+Route::prefix('classes')->group(function() {
+Route::get('', [ClassController::class, 'index'])->name('classes.index');
+Route::get('create', [ClassController::class, 'create'])->name('classes.create');
+Route::post('', [ClassController::class, 'store'])->name('classes.store');
+Route::get('{id}/edit', [ClassController::class, 'edit'])->name('classes.edit');
+Route::put('{id}', [ClassController::class, 'update'])->name('classes.update');
+Route::get('{id}/details', [ClassController::class, 'show'])->name('class.details');
+Route::delete('{id}/delete', [ClassController::class, 'destroy'])->name('classes.destroy');
+Route::get('trashed', [ClassController::class, 'showDeleted'])->name('classes.showDeleted');
+Route::patch('{id}', [ClassController::class, 'restore'])->name('classes.restore');
+Route::delete('{id}', [ClassController::class, 'forceDelete'])->name('classes.forceDelete');
+});
 
 //lambda function doesn't need name
 Route::get('/', function () {
