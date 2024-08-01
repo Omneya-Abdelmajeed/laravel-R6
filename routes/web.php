@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\ClassController;
+use App\Http\Controllers\ExampleController;
 
 Route::prefix('cars')->group(function() {
     Route::get('', [CarController::class, 'index'])->name('cars.index');
@@ -48,3 +49,5 @@ Route::get('/w', function () {
 //patch
 //delete:
 
+Route::get('uploadForm', [ExampleController::class, 'uploadForm']);
+Route::post('upload', [ExampleController::class, 'upload'])->name('upload');

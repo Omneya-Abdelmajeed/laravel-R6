@@ -97,13 +97,22 @@ class CarController extends Controller
         // dd($request, $id);
         //$request ==> data to be updated
         //$id
-        $data = [
-            'carTitle' => $request->carTitle,
-            'description' => $request->description,
-            'price' => $request->price,
-            'published' => isset($request->published),
-        ];
-        Car::where('id', $id)->update($data);
+        $data = $request->validate([
+            'carTitle' => 'required|string',
+            'description' => 'required|string|max:1000',
+            'price' => 'required|numeric',
+        ]);
+        $data['published'] = isset($request->published);
+        //dd($data);
+        Car::create($data);
+
+        // $data = [
+        //     'carTitle' => $request->carTitle,
+        //     'description' => $request->description,
+        //     'price' => $request->price,
+        //     'published' => isset($request->published),
+        // ];
+        // Car::where('id', $id)->update($data);
 
         // return "data updated successfully";
         return redirect()->route('cars.index');

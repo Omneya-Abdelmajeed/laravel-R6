@@ -33,4 +33,15 @@ class ExampleController extends Controller
         $data = ['name' => $name, 'email' => $email, 'subject' => $subject, 'message' => $message];
         return view('user_data', $data);
     }
+    function uploadForm() {
+        return view('upload');
+    }
+
+    public function upload(Request $request){
+        $file_extension = $request->image->getClientOriginalExtension();
+        $file_name = time() . '.' . $file_extension;
+        $path = 'assets/images';
+        $request->image->move($path, $file_name);
+        return 'Uploaded';
+    }
 }
