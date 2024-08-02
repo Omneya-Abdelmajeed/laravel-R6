@@ -24,15 +24,15 @@
     <div class="container my-5">
       <div class="bg-light p-5 rounded">
         <h2 class="fw-bold fs-2 mb-5 pb-2">Add Car</h2>
-        <form action="{{route('cars.store')}}" method="POST" class="px-md-5">
-        @csrf   
+        <form action="{{route('cars.store')}}" method="POST" enctype="multipart/form-data" class="px-md-5">
+        @csrf
         <div class="form-group mb-3 row">
             <label for="" class="form-label col-md-2 fw-bold text-md-end">Car Title:</label>
             <div class="col-md-10">
               <input type="text" placeholder="BMW" class="form-control py-2" name="carTitle" value="{{old('carTitle')}}"/>
               @error('carTitle')
                 <div class="alert alert-warning">{{$message}}</div>
-              @enderror  
+              @enderror
             </div>
           </div>
           <div class="form-group mb-3 row">
@@ -41,7 +41,7 @@
               <input type="text" placeholder="Enter price" class="form-control py-2" name="price" value="{{old('price')}}" />
               @error('price')
                 <div class="alert alert-warning">{{$message}}</div>
-              @enderror  
+              @enderror
             </div>
           </div>
           <div class="form-group mb-3 row">
@@ -50,9 +50,23 @@
               <textarea name="description" id="" cols="30" rows="5" class="form-control py-2">{{old('description')}}</textarea>
               @error('description')
                 <div class="alert alert-warning">{{$message}}</div>
-              @enderror  
+              @enderror
             </div>
           </div>
+
+          <hr>
+          
+          <div class="form-group mb-3 row">
+            <label class="form-label col-md-2 fw-bold text-md-end" for="image">Image:</label>
+            <div class="col-md-10">
+            <!-- can't restore the file so no need to write value -->
+              <input type="file" class="form-control py-2" id="image" name="image" > 
+              @error('image')
+                <div class="alert alert-warning">{{$message}}</div>
+              @enderror
+            </div>
+          </div>
+
           <hr>
           <div class="form-group mb-3 row">
             <label for="" class="form-label col-md-2 fw-bold text-md-end">Published:</label>
