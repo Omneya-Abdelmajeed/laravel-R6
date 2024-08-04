@@ -129,10 +129,6 @@ class CarController extends Controller
             $request->image->move($path, $file_name);
             $data['image'] = $file_name;
 
-        } else {
-
-            $data['image'] = $car->image;
-        
         }
         
         //dd($data);
