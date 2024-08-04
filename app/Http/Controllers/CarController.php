@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Car;
 use Illuminate\Http\Request;
-use phpDocumentor\Reflection\Types\Boolean;
+use Illuminate\Support\Facades\File;
 
 class CarController extends Controller
 {
@@ -55,15 +55,24 @@ class CarController extends Controller
         // }
         $data = $request->validate([
             //'key' => 'value'
-            'carTitle' => 'required|string',
+            'carTitle' => 'required|string|regex:/^[A-Za-z]/', //using regex: to force the user that string must start with letter
             'description' => 'required|string|max:1000',
             'price' => 'required|numeric',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             // 'published' => 'boolean',
-        ]);
+        ], ['carTitle.regex' => 'the carTitle field must begin with a letter.']); //Custom Error Message 
 
-         $data['published'] = isset($request->published);
-         dd($data);
+        $data['published'] = isset($request->published);
         
+        $file_extension = $request->image->getClientOriginalExtension();
+        $file_name = time() . '.' . $file_extension;
+        $path = 'assets/images';
+        $request->image->move($path, $file_name);
+
+        $data['image'] = $file_name;
+
+        //dd($data);
+
         Car::create($data);
         // return "Data added Successfully";
         return redirect()->route('cars.index');
@@ -101,10 +110,29 @@ class CarController extends Controller
             'carTitle' => 'required|string',
             'description' => 'required|string|max:1000',
             'price' => 'required|numeric',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
-        $data['published'] = isset($request->published);
+
+        $car = Car::findOrFail($id);
+
+        if ($request->hasFile('image')) {
+
+            $oldImagePath = public_path('assets/images/' . $car->image);
+
+            if (File::exists($oldImagePath)) {
+                File::delete($oldImagePath);
+            }
+
+            $file_extension = $request->image->getClientOriginalExtension();
+            $file_name = time() . '.' . $file_extension;
+            $path = 'assets/images';
+            $request->image->move($path, $file_name);
+            $data['image'] = $file_name;
+
+        }
+        
         //dd($data);
-        Car::create($data);
+        Car::where('id', $id)->update($data);
 
         // $data = [
         //     'carTitle' => $request->carTitle,
@@ -121,22 +149,24 @@ class CarController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Request $request,string $id)
+    public function destroy(Request $request, string $id)
     {
         //return'delete page';
         //softDelete
         Car::where('id', $id)->delete();
-       // return 'Data deleted successfully';
+        // return 'Data deleted successfully';
         return redirect()->route('cars.index');
 
     }
-    public function showDeleted(){
+    public function showDeleted()
+    {
         $cars = Car::onlyTrashed()->get();
 
         return view('trashedCars', compact('cars'));
     }
 
-    public function restore(string $id){
+    public function restore(string $id)
+    {
         Car::where('id', $id)->restore();
         return redirect()->route('cars.showDeleted');
     }
@@ -146,5 +176,5 @@ class CarController extends Controller
         Car::where('id', $id)->forceDelete();
         return redirect()->route('cars.index');
 
-    }    
+    }
 }

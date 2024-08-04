@@ -17,7 +17,7 @@
     <div class="form-group">
       <label class="control-label col-sm-2" for="image">Image:</label>
       <div class="col-sm-10">
-        <input type="file" class="form-control" id="email" name="image">
+        <input type="file" class="form-control" id="image" name="image">
       </div>
     </div>
 
