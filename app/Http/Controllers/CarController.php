@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Car;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use App\Traits\Common;
 
 class CarController extends Controller
 {
+    use Common;
     /**
      * Display a listing of the resource.
      */
@@ -58,18 +60,13 @@ class CarController extends Controller
             'carTitle' => 'required|string|regex:/^[A-Za-z]/', //using regex: to force the user that string must start with letter
             'description' => 'required|string|max:1000',
             'price' => 'required|numeric',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image' => 'required|mimes:jpeg,png,jpg,gif|max:2048',
+            'published' => 'boolean',
             // 'published' => 'boolean',
         ], ['carTitle.regex' => 'the carTitle field must begin with a letter.']); //Custom Error Message 
 
         $data['published'] = isset($request->published);
-        
-        $file_extension = $request->image->getClientOriginalExtension();
-        $file_name = time() . '.' . $file_extension;
-        $path = 'assets/images';
-        $request->image->move($path, $file_name);
-
-        $data['image'] = $file_name;
+        $data['image'] = $this->uploadFile($request->image, 'assets/images');
 
         //dd($data);
 
@@ -110,26 +107,16 @@ class CarController extends Controller
             'carTitle' => 'required|string',
             'description' => 'required|string|max:1000',
             'price' => 'required|numeric',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image' => 'nullable|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
-
-        $car = Car::findOrFail($id);
 
         if ($request->hasFile('image')) {
 
-            $oldImagePath = public_path('assets/images/' . $car->image);
-
-            if (File::exists($oldImagePath)) {
-                File::delete($oldImagePath);
-            }
-
-            $file_extension = $request->image->getClientOriginalExtension();
-            $file_name = time() . '.' . $file_extension;
-            $path = 'assets/images';
-            $request->image->move($path, $file_name);
-            $data['image'] = $file_name;
+            $data['image'] = $this->uploadFile($request->image, 'assets/images');
 
         }
+
+        $data['published'] = isset($request->published);
         
         //dd($data);
         Car::where('id', $id)->update($data);
