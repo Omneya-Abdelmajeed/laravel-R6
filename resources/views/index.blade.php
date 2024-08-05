@@ -312,10 +312,12 @@ https://www.tooplate.com/view/2127-little-fashion
                             <h2 class="mb-5">Featured Products</h2>
                         </div>
 
+                        @foreach($products as $product)
+
                         <div class="col-lg-4 col-12 mb-3">
                             <div class="product-thumb">
                                 <a href="product-detail.html">
-                                    <img src="{{asset('assets/images/product/evan-mcdougall-qnh1odlqOmk-unsplash.jpeg')}}" class="img-fluid product-image" alt="">
+                                    <img src="{{asset('assets/images/product/' . $product['image'])}}" class="img-fluid product-image" alt="product_image">
                                 </a>
 
                                 <div class="product-top d-flex">
@@ -327,66 +329,17 @@ https://www.tooplate.com/view/2127-little-fashion
                                 <div class="product-info d-flex">
                                     <div>
                                         <h5 class="product-title mb-0">
-                                            <a href="product-detail.html" class="product-title-link">Tree pot</a>
+                                            <a href="product-detail.html" class="product-title-link">{{$product['title']}}</a>
                                         </h5>
 
-                                        <p class="product-p">Original package design from house</p>
+                                        <p class="product-p">{{$product['shortDescription']}}</p>
                                     </div>
 
-                                    <small class="product-price text-muted ms-auto mt-auto mb-5">$25</small>
+                                    <small class="product-price text-muted ms-auto mt-auto mb-5">${{$product['price']}}</small>
                                 </div>
                             </div>
                         </div>
-
-                        <div class="col-lg-4 col-12 mb-3">
-                            <div class="product-thumb">
-                                <a href="product-detail.html">
-                                    <img src="{{asset('assets/images/product/jordan-nix-CkCUvwMXAac-unsplash.jpeg')}}" class="img-fluid product-image" alt="">
-                                </a>
-
-                                <div class="product-top d-flex">
-                                    <span class="product-alert">Low Price</span>
-
-                                    <a href="#" class="bi-heart-fill product-icon ms-auto"></a>
-                                </div>
-
-                                <div class="product-info d-flex">
-                                    <div>
-                                        <h5 class="product-title mb-0">
-                                            <a href="product-detail.html" class="product-title-link">Fashion Set</a>
-                                        </h5>
-
-                                        <p class="product-p">Costume Package</p>
-                                    </div>
-
-                                    <small class="product-price text-muted ms-auto mt-auto mb-5">$35</small>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-4 col-12">
-                            <div class="product-thumb">
-                                <a href="product-detail.html">
-                                    <img src="{{asset('assets/images/product/nature-zen-3Dn1BZZv3m8-unsplash.jpeg')}}" class="img-fluid product-image" alt="">
-                                </a>
-
-                                <div class="product-top d-flex">
-                                    <a href="#" class="bi-heart-fill product-icon ms-auto"></a>
-                                </div>
-
-                                <div class="product-info d-flex">
-                                    <div>
-                                        <h5 class="product-title mb-0">
-                                            <a href="product-detail.html" class="product-title-link">Juice Drinks</a>
-                                        </h5>
-
-                                        <p class="product-p">Nature made another world</p>
-                                    </div>
-
-                                    <small class="product-price text-muted ms-auto mt-auto mb-5">$45</small>
-                                </div>
-                            </div>
-                        </div>
+                        @endforeach
 
                         <div class="col-12 text-center">
                             <a href="products.html" class="view-all">View All Products</a>

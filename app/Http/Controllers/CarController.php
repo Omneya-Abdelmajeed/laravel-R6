@@ -62,10 +62,9 @@ class CarController extends Controller
             'price' => 'required|numeric',
             'image' => 'required|mimes:jpeg,png,jpg,gif|max:2048',
             'published' => 'boolean',
-            // 'published' => 'boolean',
         ], ['carTitle.regex' => 'the carTitle field must begin with a letter.']); //Custom Error Message 
 
-        $data['published'] = isset($request->published);
+        // $data['published'] = isset($request->published);
         $data['image'] = $this->uploadFile($request->image, 'assets/images');
 
         //dd($data);

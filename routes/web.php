@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\ClassController;
 use App\Http\Controllers\ExampleController;
+use App\Http\Controllers\ProductController;
 
 Route::group([
     'prefix' => 'cars',
@@ -69,3 +70,16 @@ Route::get('uploadForm', [ExampleController::class, 'uploadForm']);
 Route::post('upload', [ExampleController::class, 'upload'])->name('upload');
 
 Route::get('index', [ExampleController::class, 'index']);
+
+//task_09
+
+Route::get('index', [ProductController::class, 'index']);
+Route::group([
+    'prefix' => 'products',
+    'controller' => ProductController::class,
+    'as' => 'products.',
+], function() {
+   // Route::get('', 'index')->name('index');
+    Route::get('create',  'create')->name('create');
+    Route::post('', 'store')->name('store');
+});
