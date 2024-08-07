@@ -62,7 +62,7 @@
 
                 @if($car['image'])
                   <div class="mb-3">
-                    <img src="{{ asset('assets/images/' . $car['image']) }}" alt="car_image" class="img-fluid" style="max-width: 200px;">
+                    <img src="{{ asset('assets/images/cars/' . $car['image']) }}" alt="car_image" class="img-fluid" style="max-width: 200px;">
                   </div>
                 @endif
 

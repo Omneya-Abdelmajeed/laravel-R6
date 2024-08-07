@@ -65,7 +65,7 @@ class CarController extends Controller
         ], ['carTitle.regex' => 'the carTitle field must begin with a letter.']); //Custom Error Message 
 
         // $data['published'] = isset($request->published);
-        $data['image'] = $this->uploadFile($request->image, 'assets/images');
+        $data['image'] = $this->uploadFile($request->image, 'assets/images/cars');
 
         //dd($data);
 
@@ -111,7 +111,7 @@ class CarController extends Controller
 
         if ($request->hasFile('image')) {
 
-            $data['image'] = $this->uploadFile($request->image, 'assets/images');
+            $data['image'] = $this->uploadFile($request->image, 'assets/images/cars');
 
         }
 

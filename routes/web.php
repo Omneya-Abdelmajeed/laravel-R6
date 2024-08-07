@@ -70,6 +70,8 @@ Route::get('uploadForm', [ExampleController::class, 'uploadForm']);
 Route::post('upload', [ExampleController::class, 'upload'])->name('upload');
 
 Route::get('index', [ExampleController::class, 'index']);
+Route::get('about', [ExampleController::class, 'about']);
+
 
 //task_09
 
@@ -83,3 +85,4 @@ Route::group([
     Route::get('create',  'create')->name('create');
     Route::post('', 'store')->name('store');
 });
+
