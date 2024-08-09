@@ -11,13 +11,13 @@
             @include('includes.navbar')
 
               @yield('content')
-              
-        </main>
 
             @include('includes.footer')
             @yield('team')
             <!-- JAVASCRIPT FILES -->
             @include('includes.footerJs')
+        
+        </main>    
 
     </body>
 </html>

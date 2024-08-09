@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Car;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\File;
 use App\Traits\Common;
+use Illuminate\Http\Request;
 
 class CarController extends Controller
 {
@@ -62,7 +61,7 @@ class CarController extends Controller
             'price' => 'required|numeric',
             'image' => 'required|mimes:jpeg,png,jpg,gif|max:2048',
             'published' => 'boolean',
-        ], ['carTitle.regex' => 'the carTitle field must begin with a letter.']); //Custom Error Message 
+        ], ['carTitle.regex' => 'the carTitle field must begin with a letter.']); //Custom Error Message
 
         // $data['published'] = isset($request->published);
         $data['image'] = $this->uploadFile($request->image, 'assets/images/cars');
@@ -107,6 +106,7 @@ class CarController extends Controller
             'description' => 'required|string|max:1000',
             'price' => 'required|numeric',
             'image' => 'nullable|mimes:jpeg,png,jpg,gif|max:2048',
+            'published' => 'boolean',
         ]);
 
         if ($request->hasFile('image')) {
@@ -115,8 +115,8 @@ class CarController extends Controller
 
         }
 
-        $data['published'] = isset($request->published);
-        
+        // $data['published'] = isset($request->published);
+
         //dd($data);
         Car::where('id', $id)->update($data);
 
