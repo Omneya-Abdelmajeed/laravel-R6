@@ -45,7 +45,7 @@
 
                   <div class="col-md-4" style="border-top: 3px solid #fe5d37">
                     <p class="text-primary fs-5 fw-bold lh-1 pt-2">Time:</p>
-                    <p class="lh-1 fw-bold">{{$class['time_from']}} - {{$class['time_to']}} AM</p>
+                    <p class="lh-1 fw-bold">{{date('g:i',strtotime($class['time_from']))}} - {{date('g:i A',strtotime($class['time_to']))}}</p>
                   </div>
                   <div class="col-md-4" style="border-top: 3px solid #ffc107">
                     <p class="text-warning fs-5 fw-bold lh-1 pt-2">Capacity:</p>

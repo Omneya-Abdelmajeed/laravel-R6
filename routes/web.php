@@ -69,20 +69,22 @@ Route::get('/w', function () {
 Route::get('uploadForm', [ExampleController::class, 'uploadForm']);
 Route::post('upload', [ExampleController::class, 'upload'])->name('upload');
 
-Route::get('index', [ExampleController::class, 'index']);
-Route::get('about', [ExampleController::class, 'about']);
+// Route::get('index', [ExampleController::class, 'index']);
+// Route::get('about', [ExampleController::class, 'about']);
 
 
 //task_09
 
-Route::get('index', [ProductController::class, 'index']);
+Route::get('index', [ProductController::class, 'home']);
 Route::group([
     'prefix' => 'products',
     'controller' => ProductController::class,
     'as' => 'products.',
 ], function() {
-   // Route::get('', 'index')->name('index');
+    Route::get('', 'index')->name('index');
     Route::get('create',  'create')->name('create');
     Route::post('', 'store')->name('store');
+    Route::get('edit/{id}', 'edit')->name('edit');
+    Route::put('{id}', 'update')->name('update');
 });
 

@@ -14,14 +14,23 @@ class CarFactory extends Factory
      *
      * @return array<string, mixed>
      */
+    private function generateRandomImage($path)
+    {
+        $files = scandir($path);
+        $files = array_diff($files, array('.', '..'));
+
+        return fake()->randomElement($files);
+    }
+
     public function definition(): array
     {
         return [
-        'carTitle' => fake()->randomElement(['BMW', 'Mercedes', 'Fiat Tipo']),
+            'carTitle' => fake()->randomElement(['BMW', 'Mercedes', 'Fiat Tipo']),
             'description' => fake()->text(),
             'price' => fake()->randomFloat(2),
             'published' => fake()->numberBetween(0, 1),
-            'image' => basename(fake()->image(public_path('assets/images/cars'))),
+            // 'image' => basename(fake()->image(public_path('assets/images/cars'))),
+            'image' => $this->generateRandomImage(public_path('assets/images/cars')),
         ];
     }
 }
