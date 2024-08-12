@@ -88,3 +88,4 @@ Route::group([
     Route::put('{id}', 'update')->name('update');
 });
 
+Route::get('testOneToOne', [ExampleController::class, 'test']);

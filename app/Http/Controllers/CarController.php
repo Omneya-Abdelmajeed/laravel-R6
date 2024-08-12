@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Car;
+use App\Models\Category;
 use App\Traits\Common;
 use Illuminate\Http\Request;
 
@@ -27,7 +28,8 @@ class CarController extends Controller
      */
     public function create()
     {
-        return view('add_car');
+        $categories = Category::select('id', 'categoryName')->get();
+        return view('add_car', compact('categories'));
     }
 
     /**
