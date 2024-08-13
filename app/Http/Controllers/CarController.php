@@ -63,6 +63,7 @@ class CarController extends Controller
             'price' => 'required|numeric',
             'image' => 'required|mimes:jpeg,png,jpg,gif|max:2048',
             'published' => 'boolean',
+            'category_id' => 'required|exists:categories,id',
         ], ['carTitle.regex' => 'the carTitle field must begin with a letter.']); //Custom Error Message
 
         // $data['published'] = isset($request->published);
@@ -92,9 +93,10 @@ class CarController extends Controller
         //
         //return "Car id = " . $id;
         $car = Car::findOrFail($id);
-        return view('edit_car', compact('car'));
+        $categories = Category::select('id', 'categoryName')->get();
+        return view('edit_car', compact('car', 'categories'));
     }
-
+  
     /**
      * Update the specified resource in storage.
      */
@@ -109,6 +111,7 @@ class CarController extends Controller
             'price' => 'required|numeric',
             'image' => 'nullable|mimes:jpeg,png,jpg,gif|max:2048',
             'published' => 'boolean',
+            'category_id' => 'required|exists:categories,id',
         ]);
 
         if ($request->hasFile('image')) {

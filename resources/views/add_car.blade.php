@@ -48,13 +48,16 @@
           <div class="form-group mb-3 row">
             <label for="" class="form-label col-md-2 fw-bold text-md-end">Category:</label>
             <div class="col-md-10">
-              <select name="categoryName" id="" class="form-control">
+              <select name="category_id" id="" class="form-control">
                 <option value="">Select Category</option>
                 @foreach($categories as $category)
-                <option value="{{$category->id}}">{{$category->categoryName}}</option>
+                <option value="{{$category->id}}" {{ old('category_id') == $category->id ? 'selected' : '' }}>{{$category->categoryName}}</option> 
+                <!-- another way as the edit blade: -->
+                <!-- <option value="{{$category->id}}" @selected(old('category_id') == $category->id)>{{$category->categoryName}}</option> -->
+                
                 @endforeach
               </select>
-              @error('category')
+              @error('category_id')
                 <div class="alert alert-warning">{{$message}}</div>
               @enderror
             </div>
@@ -70,12 +73,12 @@
           </div>
 
           <hr>
-          
+
           <div class="form-group mb-3 row">
             <label class="form-label col-md-2 fw-bold text-md-end" for="image">Image:</label>
             <div class="col-md-10">
             <!-- can't restore the file so no need to write value -->
-              <input type="file" class="form-control py-2" id="image" name="image" > 
+              <input type="file" class="form-control py-2" id="image" name="image" >
               @error('image')
                 <div class="alert alert-warning">{{$message}}</div>
               @enderror
@@ -86,6 +89,7 @@
           <div class="form-group mb-3 row">
             <label for="" class="form-label col-md-2 fw-bold text-md-end">Published:</label>
             <div class="col-md-10">
+            <input type="hidden" name="published" value="0">
               <input type="checkbox" class="form-check-input" style="padding: 0.7rem;" name="published" value="1" @checked(old('published'))/>
             </div>
           </div>

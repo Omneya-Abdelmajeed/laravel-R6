@@ -43,7 +43,7 @@ class ProductController extends Controller
         $data['image'] = $this->uploadFile($request->image, 'assets/images/product');
         // dd($data);
         Product::create($data);
-        return "Data added Successfully";
+        return redirect()->route('products.index');
     }
 
     /**

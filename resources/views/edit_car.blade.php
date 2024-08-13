@@ -46,6 +46,20 @@
             </div>
           </div>
           <div class="form-group mb-3 row">
+            <label for="" class="form-label col-md-2 fw-bold text-md-end">Category:</label>
+            <div class="col-md-10">
+              <select name="category_id" id="" class="form-control">
+                <option value="">Select Category</option>
+                @foreach($categories as $category)
+                <option value="{{$category->id}}" @selected(old('category_id', $car->category_id) == $category->id)>{{$category->categoryName}}</option>
+                @endforeach
+              </select>
+              @error('category_id')
+                <div class="alert alert-warning">{{$message}}</div>
+              @enderror
+            </div>
+          </div>
+          <div class="form-group mb-3 row">
             <label for="" class="form-label col-md-2 fw-bold text-md-end">Description:</label>
             <div class="col-md-10">
               <textarea name="description" id="" cols="30" rows="5" class="form-control py-2">{{old('description', $car['description'])}}</textarea>
