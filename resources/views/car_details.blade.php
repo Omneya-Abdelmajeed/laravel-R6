@@ -39,6 +39,13 @@
                   <span class="fw-bold">Price:</span> {{$car['price']}}$
                 </p>
               </div>
+             
+              <div class="mb-4">
+                <p class="card-text">
+                  <span class="fw-bold">Category:</span> {{ $car->category->categoryName }}
+                </p>
+              </div>
+
               <div class="mb-4">
                 <p class="card-text">
                   <span class="fw-bold">Published:</span> {{$car['published'] ? 'YES' : 'NO'}}
