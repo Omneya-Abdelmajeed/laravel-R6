@@ -18,7 +18,8 @@ class CarController extends Controller
         //get all cars from database
         //return view all cars
         //select * from cars by the following code:
-        $cars = Car::get();
+        // $cars = Car::get();
+        $cars = Car::with('category')->get();
 
         return view('cars', compact('cars'));
     }
@@ -81,7 +82,10 @@ class CarController extends Controller
      */
     public function show(string $id)
     {
-        $car = Car::findOrFail($id);
+        // $car = Car::findOrFail($id);
+        $car = Car::with('category')->findOrFail($id);
+        // dd($car);
+        // dd($car->category->categoryName);
         return view('car_details', compact('car'));
     }
 

@@ -6,10 +6,15 @@ use App\Http\Controllers\ClassController;
 use App\Http\Controllers\ExampleController;
 use App\Http\Controllers\ProductController;
 
+Route::get('/', function () {
+    return view('welcome');
+});
+
 Route::group([
     'prefix' => 'cars',
     'controller' => CarController::class,
     'as' => 'cars.',
+    'middleware' => 'verified',
 ], function() {
     Route::get('', 'index')->name('index');
     Route::get('create', 'create')->name('create');
@@ -89,3 +94,7 @@ Route::group([
 });
 
 Route::get('testOneToOne', [ExampleController::class, 'test']);
+
+Auth::routes(['verify' => true]);
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
