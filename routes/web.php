@@ -5,6 +5,7 @@ use App\Http\Controllers\CarController;
 use App\Http\Controllers\ClassController;
 use App\Http\Controllers\ExampleController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ContactController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -98,3 +99,6 @@ Route::get('testOneToOne', [ExampleController::class, 'test']);
 Auth::routes(['verify' => true]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/contact', [ContactController::class, 'index'])->name('contact.form');
+Route::post('/contact', [ContactController::class, 'send'])->name('contact.submit');
