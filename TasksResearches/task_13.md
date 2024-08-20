@@ -142,4 +142,39 @@ Route::group([
             return view('home');
         }
     }
+    ```
+
+### Using Middleware in bootstrap/app.php: 
+Define middleware that you want to apply globally to all requests.
+
+- **Example from laravel `bootstrap/app.php` **:
+    ```php
+        return Application::configure(basePath: dirname(__DIR__))
+        ->withRouting(
+            web: __DIR__.'/../routes/web.php',
+            commands: __DIR__.'/../routes/console.php',
+            health: '/up',
+        )
+        ->withMiddleware(function (Middleware $middleware) {
+            //
+        })
+        ->withExceptions(function (Exceptions $exceptions) {
+            //
+        })->create();
+    ```
+- In the part of `withMiddleware` you can use any Middleware you want to use as ex: `  \App\Http\Middleware\CheckForMaintenanceMode::class,` 
+
+## How to custom Middleware?
+- 1st you make a new Middleware by using this command line:
+```php
+php artisan make:middleware NameYourMiddleware
+```
+this will make a new Middleware file placed in
+    `app/Http/Middleware`.
+
+- 2nd you need to define your Middleware as to write your code to add your logic, maybe as checking user privileges.
+
+- 3rd you need to register your Middleware as you can use it.
+
+- 4th use it by applying to route or controller.
 
