@@ -15,6 +15,7 @@ class CarController extends Controller
      */
     public function index()
     {
+        //dd(session('test'));
         //get all cars from database
         //return view all cars
         //select * from cars by the following code:
@@ -29,6 +30,8 @@ class CarController extends Controller
      */
     public function create()
     {
+        session()->put('test', 'First Laravel session');
+
         $categories = Category::select('id', 'categoryName')->get();
         return view('add_car', compact('categories'));
     }

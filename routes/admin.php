@@ -7,11 +7,17 @@ Route::get('/', function () {
   return view('welcome');
 });
 
-Route::group([
+
+Route::group(
+  [
+    'prefix' => LaravelLocalization::setLocale(),
+    'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
+  ], function(){ 
+Route::group(['middleware' => 'verified',
   'prefix' => 'cars',
   'controller' => CarController::class,
   'as' => 'cars.',
-  'middleware' => 'verified',
+  // 'middleware' => 'verified',
 ], function() {
   Route::get('', 'index')->name('index');
   Route::get('create', 'create')->name('create');
@@ -23,4 +29,5 @@ Route::group([
   Route::get('trashed', 'showDeleted')->name('showDeleted');
   Route::patch('{id}', 'restore')->name('restore');
   Route::delete('{id}/force', 'forceDelete')->name('forceDelete');
+   });
 });
