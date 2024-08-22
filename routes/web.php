@@ -11,23 +11,23 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::group([
-    'prefix' => 'cars',
-    'controller' => CarController::class,
-    'as' => 'cars.',
-    'middleware' => 'verified',
-], function() {
-    Route::get('', 'index')->name('index');
-    Route::get('create', 'create')->name('create');
-    Route::post('', 'store')->name('store');
-    Route::get('{id}/edit', 'edit')->name('edit');
-    Route::put('{id}', 'update')->name('update');
-    Route::get('{id}/details', 'show')->name('details');  // Fixed naming inconsistency
-    Route::delete('{id}', 'destroy')->name('destroy');
-    Route::get('trashed', 'showDeleted')->name('showDeleted');
-    Route::patch('{id}', 'restore')->name('restore');
-    Route::delete('{id}/force', 'forceDelete')->name('forceDelete');
-});
+// Route::group([
+//     'prefix' => 'cars',
+//     'controller' => CarController::class,
+//     'as' => 'cars.',
+//     'middleware' => 'verified',
+// ], function() {
+//     Route::get('', 'index')->name('index');
+//     Route::get('create', 'create')->name('create');
+//     Route::post('', 'store')->name('store');
+//     Route::get('{id}/edit', 'edit')->name('edit');
+//     Route::put('{id}', 'update')->name('update');
+//     Route::get('{id}/details', 'show')->name('details');  // Fixed naming inconsistency
+//     Route::delete('{id}', 'destroy')->name('destroy');
+//     Route::get('trashed', 'showDeleted')->name('showDeleted');
+//     Route::patch('{id}', 'restore')->name('restore');
+//     Route::delete('{id}/force', 'forceDelete')->name('forceDelete');
+// });
 // Route::prefix('cars')->group(function() {
 //     Route::get('', [CarController::class, 'index'])->name('cars.index');
 //     Route::get('create', [CarController::class, 'create'])->name('cars.create');
@@ -102,3 +102,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::get('/contact', [ContactController::class, 'index'])->name('contact.form');
 Route::post('/contact', [ContactController::class, 'send'])->name('contact.submit');
+
+//Admin Routes
+require base_path('routes/admin.php');
+//Route::prefix('admin')->middleware(['auth', 'verified'])->name('admin.')->group(base_path('routes/admin.php'));
+Route::prefix('admin')->group(base_path('routes/admin.php'));
