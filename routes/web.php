@@ -104,6 +104,6 @@ Route::get('/contact', [ContactController::class, 'index'])->name('contact.form'
 Route::post('/contact', [ContactController::class, 'send'])->name('contact.submit');
 
 //Admin Routes
-require base_path('routes/admin.php');
-//Route::prefix('admin')->middleware(['auth', 'verified'])->name('admin.')->group(base_path('routes/admin.php'));
-Route::prefix('admin')->group(base_path('routes/admin.php'));
+// require base_path('routes/admin.php');
+// //Route::prefix('admin')->middleware(['auth', 'verified'])->name('admin.')->group(base_path('routes/admin.php'));
+// Route::prefix('admin')->group(base_path('routes/admin.php'));
