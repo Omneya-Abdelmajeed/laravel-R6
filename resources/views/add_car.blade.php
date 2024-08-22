@@ -5,7 +5,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Add Car</title>
+  <title>{{ __('cars.addPageHead')}}</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -31,29 +31,29 @@
         <form action="{{route('cars.store')}}" method="POST" enctype="multipart/form-data" class="px-md-5">
         @csrf
         <div class="form-group mb-3 row">
-            <label for="" class="form-label col-md-2 fw-bold text-md-end">Car Title:</label>
+            <label for="" class="form-label col-md-2 fw-bold text-md-end">{{ __('cars.carTitle')}}</label>
             <div class="col-md-10">
-              <input type="text" placeholder="BMW" class="form-control py-2" name="carTitle" value="{{old('carTitle')}}"/>
+              <input type="text" placeholder="{{ __('cars.placeholderCarTitle')}}" class="form-control py-2" name="carTitle" value="{{old('carTitle')}}"/>
               @error('carTitle')
-                <div class="alert alert-warning">{{$message}}</div>
+                <div class="alert alert-warning">{{__('cars.titleRequired')}}</div>
               @enderror
             </div>
           </div>
           <div class="form-group mb-3 row">
-            <label for="" class="form-label col-md-2 fw-bold text-md-end">Price:</label>
+            <label for="" class="form-label col-md-2 fw-bold text-md-end">{{ __('cars.price')}}:</label>
             <div class="col-md-10">
-              <input type="text" placeholder="Enter price" class="form-control py-2" name="price" value="{{old('price')}}" />
+              <input type="text" placeholder="{{ __('cars.placeholderPrice')}}" class="form-control py-2" name="price" value="{{old('price')}}" />
               @error('price')
-                <div class="alert alert-warning">{{$message}}</div>
+                <div class="alert alert-warning">{{__('cars.priceRequired')}}</div>
               @enderror
             </div>
 
           </div>
           <div class="form-group mb-3 row">
-            <label for="" class="form-label col-md-2 fw-bold text-md-end">Category:</label>
+            <label for="" class="form-label col-md-2 fw-bold text-md-end">{{ __('cars.category')}}:</label>
             <div class="col-md-10">
               <select name="category_id" id="" class="form-control">
-                <option value="">Select Category</option>
+                <option value="">{{ __('cars.selectCategory')}}</option>
                 @foreach($categories as $category)
                 <option value="{{$category->id}}" {{ old('category_id') == $category->id ? 'selected' : '' }}>{{$category->categoryName}}</option> 
                 <!-- another way as the edit blade: -->
@@ -62,16 +62,16 @@
                 @endforeach
               </select>
               @error('category_id')
-                <div class="alert alert-warning">{{$message}}</div>
+                <div class="alert alert-warning">{{__('cars.categoryRequired')}}</div>
               @enderror
             </div>
           </div>
           <div class="form-group mb-3 row">
-            <label for="" class="form-label col-md-2 fw-bold text-md-end">Description:</label>
+            <label for="" class="form-label col-md-2 fw-bold text-md-end">{{ __('cars.description')}}:</label>
             <div class="col-md-10">
               <textarea name="description" id="" cols="30" rows="5" class="form-control py-2">{{old('description')}}</textarea>
               @error('description')
-                <div class="alert alert-warning">{{$message}}</div>
+                <div class="alert alert-warning">{{__('cars.descriptionRequired')}}</div>
               @enderror
             </div>
           </div>
@@ -79,19 +79,22 @@
           <hr>
 
           <div class="form-group mb-3 row">
-            <label class="form-label col-md-2 fw-bold text-md-end" for="image">Image:</label>
+            <label class="form-label col-md-2 fw-bold text-md-end" for="image">{{ __('cars.image')}}:</label>
             <div class="col-md-10">
             <!-- can't restore the file so no need to write value -->
-              <input type="file" class="form-control py-2" id="image" name="image" >
+             
+            <label for="files" class="btn btn-info" style="background-color: gray; border: 2px solid gray;">{{ __('cars.chooseFileButton')}}</label>
+            <input id="files" style="visibility:hidden;" type="file" name="image">
+              <!-- <input type="file" class="form-control py-2" id="image" name="image" > -->
               @error('image')
-                <div class="alert alert-warning">{{$message}}</div>
+                <div class="alert alert-warning">{{__('cars.imageRequired')}}</div>
               @enderror
             </div>
           </div>
-
+        
           <hr>
           <div class="form-group mb-3 row">
-            <label for="" class="form-label col-md-2 fw-bold text-md-end">Published:</label>
+            <label for="" class="form-label col-md-2 fw-bold text-md-end">{{ __('cars.published')}}:</label>
             <div class="col-md-10">
             <input type="hidden" name="published" value="0">
               <input type="checkbox" class="form-check-input" style="padding: 0.7rem;" name="published" value="1" @checked(old('published'))/>
@@ -99,7 +102,7 @@
           </div>
           <div class="text-md-end">
             <button class="btn mt-4 btn-secondary text-white fs-5 fw-bold border-0 py-2 px-md-5">
-              Add Car
+             {{ __('cars.addCarButton')}}
             </button>
           </div>
         </form>
