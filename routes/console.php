@@ -10,4 +10,4 @@ Artisan::command('inspire', function () {
 
 // Schedule::command('app:send-email')->everyMinute();
 // Schedule::command('app:expiration')->everyMinute();
-schedule::command('backup:database')->everyMinute(); 
+schedule::command('backup:database')->daily(); 
