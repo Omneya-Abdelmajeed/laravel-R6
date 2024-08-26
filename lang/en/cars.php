@@ -18,9 +18,9 @@ return [
 
 //Error_messages
 
-'titleRequired' => 'The car title field is required.',
-'priceRequired' => 'The price field is required.',
-'categoryRequired' => 'The category field is required.',
-'descriptionRequired' => 'The description field is required.',
-'imageRequired' => 'The image field is required.',
+// 'titleRequired' => 'The car title field is required.',
+// 'priceRequired' => 'The price field is required.',
+// 'categoryRequired' => 'The category field is required.',
+// 'descriptionRequired' => 'The description field is required.',
+// 'imageRequired' => 'The image field is required.',
 ];
