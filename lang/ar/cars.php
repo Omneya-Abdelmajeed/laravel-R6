@@ -18,9 +18,9 @@ return [
 
 //Error_messages
 
-'titleRequired' => 'يجب إدخال الاسم',
-'priceRequired' => 'يجب إدخال السعر',
-'categoryRequired' => 'يجب اختيار الفئة أو النوع',
-'descriptionRequired' => 'يجب إدخال الوصف',
-'imageRequired' => 'يجب اختيار صورة',
+// 'titleRequired' => 'يجب إدخال الاسم',
+// 'priceRequired' => 'يجب إدخال السعر',
+// 'categoryRequired' => 'يجب اختيار الفئة أو النوع',
+// 'descriptionRequired' => 'يجب إدخال الوصف',
+// 'imageRequired' => 'يجب اختيار صورة',
 ];

@@ -35,7 +35,7 @@
             <div class="col-md-10">
               <input type="text" placeholder="{{ __('cars.placeholderCarTitle')}}" class="form-control py-2" name="carTitle" value="{{old('carTitle')}}"/>
               @error('carTitle')
-                <div class="alert alert-warning">{{__('cars.titleRequired')}}</div>
+                <div class="alert alert-warning">{{$message}}</div>
               @enderror
             </div>
           </div>
@@ -44,7 +44,7 @@
             <div class="col-md-10">
               <input type="text" placeholder="{{ __('cars.placeholderPrice')}}" class="form-control py-2" name="price" value="{{old('price')}}" />
               @error('price')
-                <div class="alert alert-warning">{{__('cars.priceRequired')}}</div>
+                <div class="alert alert-warning">{{$message}}</div>
               @enderror
             </div>
 
@@ -62,7 +62,7 @@
                 @endforeach
               </select>
               @error('category_id')
-                <div class="alert alert-warning">{{__('cars.categoryRequired')}}</div>
+                <div class="alert alert-warning">{{$message}}</div>
               @enderror
             </div>
           </div>
@@ -71,7 +71,7 @@
             <div class="col-md-10">
               <textarea name="description" id="" cols="30" rows="5" class="form-control py-2">{{old('description')}}</textarea>
               @error('description')
-                <div class="alert alert-warning">{{__('cars.descriptionRequired')}}</div>
+                <div class="alert alert-warning">{{$message}}</div>
               @enderror
             </div>
           </div>
@@ -87,7 +87,7 @@
             <input id="files" style="visibility:hidden;" type="file" name="image">
               <!-- <input type="file" class="form-control py-2" id="image" name="image" > -->
               @error('image')
-                <div class="alert alert-warning">{{__('cars.imageRequired')}}</div>
+                <div class="alert alert-warning">{{$message}}</div>
               @enderror
             </div>
           </div>
