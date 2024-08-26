@@ -9,4 +9,5 @@ Artisan::command('inspire', function () {
 })->purpose('Display an inspiring quote')->hourly();
 
 // Schedule::command('app:send-email')->everyMinute();
-Schedule::command('app:expiration')->everyMinute();
+// Schedule::command('app:expiration')->everyMinute();
+schedule::command('backup:database')->everyMinute(); 
