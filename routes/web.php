@@ -6,6 +6,7 @@ use App\Http\Controllers\ClassController;
 use App\Http\Controllers\ExampleController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\SocialController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -107,3 +108,6 @@ Route::post('/contact', [ContactController::class, 'send'])->name('contact.submi
 // require base_path('routes/admin.php');
 // //Route::prefix('admin')->middleware(['auth', 'verified'])->name('admin.')->group(base_path('routes/admin.php'));
 // Route::prefix('admin')->group(base_path('routes/admin.php'));
+
+Route::get('auth/github/redirect', [SocialController::class, 'redirect'])->name('socialLogin');
+Route::get('auth/github/callback', [SocialController::class, 'callback']);
